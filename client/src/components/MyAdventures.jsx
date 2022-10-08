@@ -5,7 +5,7 @@ import { Navigate } from "react-router-dom";
 import { Button, Container } from "react-bootstrap";
 import "./css/Adventures.css";
 
-export default class Adventures extends Component {
+export default class MyAdventures extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -17,6 +17,7 @@ export default class Adventures extends Component {
   componentDidMount() {
     this.loadAdventureList();
     this.loadUserCharacters();
+    console.log('user-id', this.props.user.id)
   }
 
   loadAdventureList = () => {
@@ -30,7 +31,7 @@ export default class Adventures extends Component {
         let adventureFiltered = response.data.adventures.filter((a) => {
           // console.log(a.user,'vs',this.props.user.id)
           return a.user
-            ? a.user
+            ? a.user === this.props.user.id
             : !this.props.isFiltered;
         });
         setTimeout(() => {

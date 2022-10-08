@@ -18,6 +18,8 @@ import CharacterDetail from "./components/CharacterDetail";
 import Story from "./components/Story";
 import ImageSelect from "./components/ImageSelect";
 import Character from "./components/Character";
+import MyCharacters from "./components/MyCharacters"
+import MyAdventures from "./components/MyAdventures"
 
 import "./App.scss";
 import { Link } from "react-router-dom";
@@ -365,11 +367,17 @@ export default class App extends Component {
                     <Link to='/create-adventure' className='nav-link'>
                       Create Adventure
                     </Link>
-                    <Link to='/characters' className='nav-link'>
+                    {/* <Link to='/characters' className='nav-link'>
                       Characters
                     </Link>
-                    <Link to='/adventure-list' className='nav-link'>
+                    <Link to='/adventures' className='nav-link'>
                       Adventures
+                    </Link> */}
+                    <Link to='/my-characters' className='nav-link'>
+                      My Characters
+                    </Link>
+                    <Link to='/my-adventures' className='nav-link'>
+                      My Adventures
                     </Link>
                   </>
                 ) : (
@@ -497,11 +505,32 @@ export default class App extends Component {
               />
             }
           />
+
           <Route
-            path='/adventure-list'
+            path='/adventures'
             exact
             element={
               <Adventures
+                continueAdventure={this.continueAdventure}
+                setMessage={this.setMessage}
+                user={this.state.user}
+                isFiltered={true}
+                userList={this.state.users}
+                startStory={this.startStory}
+                createAchievement={this.createAchievement}
+                setAdventure={this.setAdventure}
+                origin={"/adventure-list"}
+                storyBackBtnRedirectFcn={this.storyBackBtnRedirectFcn}
+              />
+            }
+          />
+
+
+          <Route
+            path='/my-adventures'
+            exact
+            element={
+              <MyAdventures
                 continueAdventure={this.continueAdventure}
                 setMessage={this.setMessage}
                 user={this.state.user}
@@ -539,6 +568,25 @@ export default class App extends Component {
                 setMessage={this.setMessage}
                 user={this.state.user}
                 isFiltered={true}
+                startStory={this.startStory}
+                userList={this.state.users}
+                createAchievement={this.createAchievement}
+              />
+            }
+          />
+
+          <Route
+            path='/my-characters'
+            exact
+            element={
+              <MyCharacters
+                createAdventure={this.createAdventure}
+                setCharacter={this.setCharacter}
+                dontCreateRandomCharacter={this.dontCreateRandomCharacter}
+                filtered={""}
+                setMessage={this.setMessage}
+                user={this.state.user}
+                isFiltered={false}
                 startStory={this.startStory}
                 userList={this.state.users}
                 createAchievement={this.createAchievement}
